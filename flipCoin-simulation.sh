@@ -1,24 +1,37 @@
 #!/bin/bash -x
 
-echo "Flip coin simulation problem" 
+#initailized veriables
+head=0
+tail=0
 
-#INITIALIZE THE RANDOM VALUE
-Head=0
-Tail=0
-read -p "how many times do you want to do flip a coin: " times
-
-for (( i=1; i<=$times; i++))
+#to be continue till either of them have won 21 times
+while [ $head -lt 21 ] && [ $tail -lt 21 ]
 do
-	random=$(( RANDOM%2 ))
+	Result=$(( RANDOM % 2 ))
 
-	#CHECK THE CONDITION AND DISPLAY HEAD OR TAIL
-	if [ $random -eq 1 ]
+	if [[ $Result -eq 1 ]]
 	then
-		Head=$(( $Head + 1))
+		head=$(( $head + 1 ))
 	else
-		Tail=$(( $Tail + 1 ))
+		tail=$(( $head +1 ))
 	fi
 done
 
-echo "Head has won $Head times"
-echo "Tail has won $Tail times"
+echo "head has won $head times"
+echo "tail has won $tail times"
+
+#check the condition who's won or lose
+if [[ $head -eq 21 && $tail -eq 21 ]]
+then
+	echo "Its a Tie Head And Tail Occured 21 Times "
+
+elif [ $head -eq 21 ]
+then
+	echo "Head is Won And Firstly Occured 21 Times"
+	head_Diff=$(( $head - $tail ))
+	echo "Head is Won By $head_Diff"
+else
+	echo "Tail is Won And Firstly Occured 21 Times"
+	tail_Diff=$(( $tail - $head ))
+	echo "tail is won by $tail_Diff"
+fi
