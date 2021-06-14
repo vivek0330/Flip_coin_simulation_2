@@ -3,12 +3,22 @@
 echo "Flip coin simulation problem" 
 
 #INITIALIZE THE RANDOM VALUE
-random=$(( RANDOM%2 ))
+Head=0
+Tail=0
+read -p "how many times do you want to do flip a coin: " times
 
-#CHECK THE CONDITION AND DISPLAY HEAD OR TAIL
-if [ $random -eq 1 ]
-then
-	echo "Winner is head"
-else
-	echo "Winner is tail"
-fi
+for (( i=1; i<=$times; i++))
+do
+	random=$(( RANDOM%2 ))
+
+	#CHECK THE CONDITION AND DISPLAY HEAD OR TAIL
+	if [ $random -eq 1 ]
+	then
+		Head=$(( $Head + 1))
+	else
+		Tail=$(( $Tail + 1 ))
+	fi
+done
+
+echo "Head has won $Head times"
+echo "Tail has won $Tail times"
